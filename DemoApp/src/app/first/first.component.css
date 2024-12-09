@@ -1,0 +1,16 @@
+.primary {
+  color: chocolate;
+  font-size: medium;
+  font-weight: 200;
+}
+
+.secondary{
+  color: blue;
+  font-style: italic;
+  font-size: small;
+}
+
+.primaryextended {
+  padding: 10%;
+  margin: 10%;
+}

@@ -1,0 +1,4 @@
+
+interface IDemoService {
+  getValues() : string[];
+}
