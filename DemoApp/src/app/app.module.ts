@@ -5,19 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FirstComponent } from './first/first.component';
 import { FormsModule } from '@angular/forms';
-import { DemoService } from './services/demoservice.service';
+import { DemoService } from './services/demo.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    FirstComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule
-  ],
-  providers: [{ provide: 'IDemoService', useClass: DemoService }],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent, FirstComponent],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [DemoService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

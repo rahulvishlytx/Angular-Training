@@ -1,53 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { DemoService } from '../services/demoservice.service';
 
 @Component({
   selector: 'app-first',
   standalone: false,
-  
+
   templateUrl: './first.component.html',
-  styleUrl: './first.component.css'
+  styleUrl: './first.component.css',
 })
 export class FirstComponent implements OnInit {
+  componentName: string = 'FirstComponent';
 
-  componentName : string = 'FirstComponent';
+  twoBinding: string = 'Enter the name';
 
-  twoBinding : string = 'Enter the name';
+  srcUrl: string = 'https://angular.io/assets/images/logos/angular/angular.svg';
 
-  srcUrl : string = 'https://angular.io/assets/images/logos/angular/angular.svg';
+  isActive: boolean = false;
 
-  isActive : boolean = false;
+  activeUsers: number = 1;
 
-  activeUsers : number = 1;
+  cssClass: string = 'primary';
+  cssClasses: string[] = ['primary', 'primaryextended'];
 
-  cssClass : string = 'primary';
-  cssClasses : string[] = ['primary', 'primaryextended'];
-
-
-  listOfUser  = [
+  listOfUser = [
     { name: 'John', isActive: true },
     { name: 'Joe', isActive: true },
     { name: 'Mike', isActive: false },
-    { name: 'Essan', isActive: true }
+    { name: 'Essan', isActive: true },
   ];
 
+  constructor() {}
 
-  
-  constructor(private demoService: IDemoService) { 
-
-  }
-
-
-  
-   ngOnInit(): void {
+  ngOnInit(): void {
     console.log('FirstComponent initialized');
-    
   }
 
-  onClick(){
+  onClick() {
     console.log('Button clicked');
   }
   setClass() {
-    return this.activeUsers >=10 ? 'primary' : 'secondary' 
+    return this.activeUsers >= 10 ? 'primary' : 'secondary';
   }
 }
