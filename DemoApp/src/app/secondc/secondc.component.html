@@ -1,0 +1,47 @@
+<h4>Get API</h4>
+
+<!-- Display API data -->
+<div *ngIf="apiData">
+    <div *ngFor="let user of apiData">
+      <p>{{ user.name }} (Active: {{ user.isActive }})</p>
+    </div>
+  </div>
+
+  <h4>Get User by ID</h4>
+  <!-- Input to fetch user by ID -->
+  <input type="number" placeholder="Enter User ID" #userId />
+  <button (click)="getUserById(+userId.value)">Get User</button>
+  <div *ngIf="userById">
+    <p>User ID: {{ userById.id }}</p>
+    <p>Name: {{ userById.name }}</p>
+    <p>Email: {{ userById.email }}</p>
+  </div>
+
+  <h4>Add New User</h4>
+<button (click)="addUser()">Add User</button>
+
+<!-- <h4>Update User</h4>
+<input type="number" placeholder="Enter User ID to Update" #updateId />
+<button (click)="updateUser(+updateId.value)">Update User</button> -->
+
+<h4>Update User</h4>
+<form #updateForm="ngForm" (ngSubmit)="updateUser(updateForm.value)">
+  <div>
+    <label for="id">ID:</label>
+    <input type="number" id="id" name="id" ngModel required />
+  </div>
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" ngModel required />
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" ngModel required />
+  </div>
+  <button type="submit" [disabled]="!updateForm.valid">Update User</button>
+</form>
+
+
+<h4>Delete User</h4>
+<input type="number" placeholder="Enter User ID to Delete" #deleteId />
+<button (click)="deleteUser(+deleteId.value)">Delete User</button>

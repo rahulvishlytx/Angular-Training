@@ -7,6 +7,7 @@ import { Observable, of } from 'rxjs';
 })
 export class DemoService{
 
+  private apiUrl: string = 'https://localhost:7122/api/User';
   listOfUser = [
     { name: 'John', isActive: true },
     { name: 'Joe', isActive: true },
@@ -15,11 +16,30 @@ export class DemoService{
   ];
   constructor(private httpClient : HttpClient) { }
 
-
+  // Get all users
   getValuesFromApi() : Observable<any> {
-     return this.httpClient.get('https://localhost:7122/api/User')
+     return this.httpClient.get(this.apiUrl)
   }
 
+  // Get user by ID
+  getUserById(id: number): Observable<any> {
+    return this.httpClient.get(`${this.apiUrl}/${id}`);
+  }
+
+  // Add a new user (POST)
+  addUser(user: any): Observable<any> {
+    return this.httpClient.post(this.apiUrl, user);
+  }
+
+  // Update a user (PUT)
+  updateUserApi(id: number, user: { id: number; name: string; email: string }): Observable<any> {
+    return this.httpClient.put(`${this.apiUrl}/${id}`, user);
+  }
+
+  // Delete a user
+  deleteUser(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.apiUrl}/${id}`);
+  }
 
   getValues(): Observable<any> {
     return of(this.listOfUser)
