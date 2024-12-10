@@ -1,40 +1,76 @@
-<!-- <p>first works!</p>
+<h4>Get API</h4>
+<!-- Display API data -->
+<div *ngIf="apiData">
+  <div *ngFor="let user of apiData">
+    <p>{{ user.name }} (Active: {{ user.isActive }})</p>
+  </div>
+</div>
 
+<h4>Get User by ID</h4>
+<!-- Input to fetch user by ID -->
+<input type="number" [(ngModel)]="userId" placeholder="Enter User ID" />
+<button (click)="getUserById()">Get User</button>
+<div *ngIf="userById">
+  <p>User ID: {{ userById.id }}</p>
+  <p>Name: {{ userById.name }}</p>
+  <p>Email: {{ userById.email }}</p>
+</div>
 
-<p>{{componentName}}</p>
+<h4>Add New User</h4>
+<form (ngSubmit)="addUser()">
+  <label for="id">ID:</label>
+  <input type="number" [(ngModel)]="user.id" name="id" id="id" required />
+  <br />
 
-<input type="text" [(ngModel)]="twoBinding">
+  <label for="name">Name:</label>
+  <input type="text" [(ngModel)]="user.name" name="name" id="name" required />
+  <br />
 
-<p>This is the output value {{twoBinding}}</p>
+  <label for="email">Email:</label>
+  <input
+    type="email"
+    [(ngModel)]="user.email"
+    name="email"
+    id="email"
+    required
+  />
+  <br />
 
-<img [src]="srcUrl" alt="">
+  <button type="submit">Add User</button>
+</form>
 
+<h4>Update User</h4>
+<form (ngSubmit)="updateUser()">
+  <!-- Get user by ID to update -->
+  <label for="id">User ID:</label>
+  <input type="number" [(ngModel)]="user.id" name="id" id="id" required />
+  <button type="button" (click)="getUserById()">Fetch User</button>
+  <br />
 
-<input type="button" (click)="onClick()" value="click me">
+  <!-- Name -->
+  <label for="name">Name:</label>
+  <input type="text" [(ngModel)]="user.name" name="name" id="name" required />
+  <br />
 
-<div *ngIf="activeUsers >= 10">
-  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea atque repellendus perferendis debitis aperiam saepe. Sunt maiores fuga ipsa, eius minus corporis dolores eaque commodi veniam sequi quas libero? Et quo assumenda, eaque nesciunt adipisci delectus sequi, fugit ipsa ipsum optio at commodi sint. Ex accusantium quos ipsa quibusdam fugit!</p>
-</div> -->
+  <!-- Email -->
+  <label for="email">Email:</label>
+  <input
+    type="email"
+    [(ngModel)]="user.email"
+    name="email"
+    id="email"
+    required
+  />
+  <br />
 
+  <!-- Update button -->
+  <button type="submit">Update User</button>
+</form>
 
-<!-- <div [ngClass]="activeUsers >=10 ? 'primary' : 'secondary' " *ngFor="let item of listOfUser">
- <p>{{item.name}}  {{item.isActive}}</p>
-</div> -->
-
-
-
-
-<!-- <h3>-----------------------------------------</h3>
-<div [ngClass]="setClass()"*ngFor="let item of listOfUser">
-  <p>{{item.name}}  {{item.isActive}}</p>
- </div>
-
- <h3>-----------------------------------------</h3>
-<div [ngClass]="cssClasses" *ngFor="let item of listOfUser">
-  <p>{{item.name}}  {{item.isActive}}</p>
- </div> -->
-
-
- <div *ngFor="let item of listOfUser">
-  <p>{{item.name}}</p>
- </div>
+<h4>Delete User</h4>
+<input
+  type="number"
+  [(ngModel)]="user.id"
+  placeholder="Enter User ID to Delete"
+/>
+<button (click)="deleteUser(user.id)">Delete User</button>
