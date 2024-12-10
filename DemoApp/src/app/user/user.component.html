@@ -1,0 +1,32 @@
+<!-- user.component.html -->
+<div class="container">
+    <h1>User Management</h1>
+  
+    <!-- List of Users -->
+    <div class="user-list">
+      <h2>Users</h2>
+      <ul>
+        <li *ngFor="let user of users">
+          <span>{{ user.name }} ({{ user.email }})</span>
+          <button (click)="getUser(user.id)">View</button>
+          <button (click)="deleteUser(user.id)">Delete</button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Selected User Details -->
+    <div class="user-details" *ngIf="selectedUser">
+      <h2>Selected User</h2>
+      <p><strong>ID:</strong> {{ selectedUser.id }}</p>
+      <p><strong>Name:</strong> {{ selectedUser.name }}</p>
+      <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+      <button (click)="updateUser()">Update Name</button>
+    </div>
+  
+    <!-- Add New User -->
+    <div class="add-user">
+      <h2>Add New User</h2>
+      <button (click)="addUser()">Add Default User</button>
+    </div>
+  </div>
+  

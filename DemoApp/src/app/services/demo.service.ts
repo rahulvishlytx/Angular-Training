@@ -1,27 +1,53 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+
+export interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class DemoService{
 
-  listOfUser = [
-    { name: 'John', isActive: true },
-    { name: 'Joe', isActive: true },
-    { name: 'Mike', isActive: false },
-    { name: 'Essan', isActive: true },
-  ];
-  constructor(private httpClient : HttpClient) { }
+  private baseUrl = 'http://localhost:5014/api/User'; // Replace with the actual API URL
 
+  constructor(private http: HttpClient) {}
 
-  getValuesFromApi() : Observable<any> {
-     return this.httpClient.get('https://localhost:7122/api/User')
+  // GET: Retrieve all users
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl);
   }
 
+  // GET: Retrieve a single user by ID
+  getUser(id: number): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/${id}`);
+  }
 
-  getValues(): Observable<any> {
-    return of(this.listOfUser)
+  // POST: Add a new user
+  addUser(user: User): Observable<void> {
+    return this.http.post<void>(this.baseUrl, user, this.getHttpOptions());
+  }
+
+  // PUT: Update a user by ID
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put<User>(`${this.baseUrl}/${id}`, user, this.getHttpOptions());
+  }
+
+  // DELETE: Remove a user by ID
+  deleteUser(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.baseUrl}/${id}`);
+  }
+
+  // HTTP options for POST and PUT requests
+  private getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
   }
 }
