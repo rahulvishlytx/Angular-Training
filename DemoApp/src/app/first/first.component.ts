@@ -14,8 +14,8 @@ export class FirstComponent implements OnInit {
 
   apiData: any;
   userById: any;
-  newUser = { id: 6, name: 'John Doe', email: 'john.doe@example.com' };
-  updatedUser = { id: 6, name: 'John Smith', email: 'john.smith@example.com' };
+  //newUser = { id: 6, name: 'John Doe', email: 'john.doe@example.com' };
+  //updatedUser = { id: 6, name: 'John Smith', email: 'john.smith@example.com' };
   
   ngOnInit(): void {    
     this.Demoservice.getValuesFromApi().subscribe({
@@ -53,8 +53,9 @@ getAllUsers() {
     });
   }
   // Add a new user
-  addUser() {
-    this.Demoservice.addUser(this.newUser).subscribe({
+  addUser(formData: { id: number; name: string; email: string }) {
+    const { id, name, email } = formData;
+    this.Demoservice.addUser({ id, name, email }).subscribe({
       next: (data) => {
         console.log('User added:', data);
         this.getAllUsers(); // Refresh the user list
