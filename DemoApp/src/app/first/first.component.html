@@ -1,31 +1,39 @@
-<p>first works!</p>
+<h4>Get API</h4>
+<!-- Display API data -->
+<div *ngIf="apiData">
+    <div *ngFor="let user of apiData">
+      <p>{{ user.name }} (Active: {{ user.isActive }})</p>
+    </div>
+  </div>
+  <h4>Get User by ID</h4>
+  <!-- Input to fetch user by ID -->
+  <input type="number" placeholder="Enter User ID" #userId />
+  <button (click)="getUserById(+userId.value)">Get User</button>
+  <div *ngIf="userById">
+    <p>User ID: {{ userById.id }}</p>
+    <p>Name: {{ userById.name }}</p>
+    <p>Email: {{ userById.email }}</p>
+  </div>
+  <h4>Add New User</h4>
+<button (click)="addUser()">Add User</button>
 
+<h4>Update User</h4>
+<form #updateForm="ngForm" (ngSubmit)="updateUser(updateForm.value)">
+  <div>
+    <label for="id">ID:</label>
+    <input type="number" id="id" name="id" ngModel required />
+  </div>
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" ngModel required />
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" ngModel required />
+  </div>
+  <button type="submit" [disabled]="!updateForm.valid">Update User</button>
+</form>
 
-<p>{{componentName}}</p>
-
-<input type="text" [(ngModel)]="twoBinding">
-
-<p>This is the output value {{twoBinding}}</p>
-
-<img [src]="srcUrl" alt="">
-
-
-<input type="button" (click)="onClick()" value="click me">
-
-<div *ngIf="activeUsers >= 10">
-  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea atque repellendus perferendis debitis aperiam saepe. Sunt maiores fuga ipsa, eius minus corporis dolores eaque commodi veniam sequi quas libero? Et quo assumenda, eaque nesciunt adipisci delectus sequi, fugit ipsa ipsum optio at commodi sint. Ex accusantium quos ipsa quibusdam fugit!</p>
-</div>
-
-
-<div [ngClass]="activeUsers >=10 ? 'primary' : 'secondary' " *ngFor="let item of listOfUser">
- <p>{{item.name}}  {{item.isActive}}</p>
-</div>
-<h3>-----------------------------------------</h3>
-<div [ngClass]="setClass()"*ngFor="let item of listOfUser">
-  <p>{{item.name}}  {{item.isActive}}</p>
- </div>
-
- <h3>-----------------------------------------</h3>
-<div [ngClass]="cssClasses" *ngFor="let item of listOfUser">
-  <p>{{item.name}}  {{item.isActive}}</p>
- </div>
+<h4>Delete User</h4>
+<input type="number" placeholder="Enter User ID to Delete" #deleteId />
+<button (click)="deleteUser(+deleteId.value)">Delete User</button>

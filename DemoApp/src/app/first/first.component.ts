@@ -1,43 +1,92 @@
 import { Component, OnInit } from '@angular/core';
+import { DemoService } from '../services/demo.service';
 
 @Component({
   selector: 'app-first',
   standalone: false,
-
   templateUrl: './first.component.html',
-  styleUrl: './first.component.css',
+  styleUrl: './first.component.css'
 })
 export class FirstComponent implements OnInit {
-  componentName: string = 'FirstComponent';
+  
+  constructor(private Demoservice: DemoService){}
 
-  twoBinding: string = 'Enter the name';
-
-  srcUrl: string = 'https://angular.io/assets/images/logos/angular/angular.svg';
-
-  isActive: boolean = false;
-
-  activeUsers: number = 1;
-
-  cssClass: string = 'primary';
-  cssClasses: string[] = ['primary', 'primaryextended'];
-
-  listOfUser = [
-    { name: 'John', isActive: true },
-    { name: 'Joe', isActive: true },
-    { name: 'Mike', isActive: false },
-    { name: 'Essan', isActive: true },
-  ];
-
-  constructor() {}
-
-  ngOnInit(): void {
-    console.log('FirstComponent initialized');
+  apiData: any;
+  userById: any;
+  newUser = { id: 6, name: 'John Doe', email: 'john.doe@example.com' };
+  updatedUser = { id: 6, name: 'John Smith', email: 'john.smith@example.com' };
+  
+  ngOnInit(): void {    
+    this.Demoservice.getValuesFromApi().subscribe({
+      next: (data) => {
+        console.log('Data received:', data);
+        this.apiData = data; // Store API response
+      },
+      error: (error) => {
+        console.error('Error fetching data:', error);
+      }
+    });
   }
-
-  onClick() {
-    console.log('Button clicked');
+// Get all users
+getAllUsers() {
+  this.Demoservice.getValuesFromApi().subscribe({
+    next: (data) => {
+      console.log('All users:', data);
+      this.apiData = data;
+    },
+    error: (error) => {
+      console.error('Error fetching all users:', error);
+    },
+  });
+}
+  // Get user by ID
+  getUserById(id: number){
+    this.Demoservice.getUserById(id).subscribe({
+      next: (data) => {
+        console.log(`User with ID ${id}:`, data);
+        this.userById = data;
+      },
+      error: (error) => {
+        console.error(`Error fetching user with ID ${id}:`, error);
+      }
+    });
   }
-  setClass() {
-    return this.activeUsers >= 10 ? 'primary' : 'secondary';
+  // Add a new user
+  addUser() {
+    this.Demoservice.addUser(this.newUser).subscribe({
+      next: (data) => {
+        console.log('User added:', data);
+        this.getAllUsers(); // Refresh the user list
+      },
+      error: (error) => {
+        console.error('Error adding user:', error);
+      },
+    });
+  }
+  // Update a user
+  updateUser(formData: { id: number; name: string; email: string }) {
+    const { id, name, email } = formData;
+    this.Demoservice.updateUser(id, { id, name, email }).subscribe({
+      next: (response) => {
+        console.log('User updated successfully:', response);
+        alert('User updated successfully!');
+      },
+      error: (error) => {
+        console.error('Error updating user:', error);
+        alert('Error updating user.');
+      },
+    });
+  }
+  // Delete a user
+  deleteUser(id: number) {
+    this.Demoservice.deleteUser(id).subscribe({
+      next: () => {
+        console.log(`User with ID ${id} deleted`);
+        this.getAllUsers(); // Refresh the user list
+      },
+      error: (error) => {
+        console.error(`Error deleting user with ID ${id}:`, error);
+      },
+    });
   }
 }

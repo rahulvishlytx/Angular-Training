@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { FirstComponent } from './first/first.component';
 import { FormsModule } from '@angular/forms';
 import { DemoService } from './services/demo.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, FirstComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [DemoService],
   bootstrap: [AppComponent],
 })
