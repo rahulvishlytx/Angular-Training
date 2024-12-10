@@ -1,4 +1,4 @@
-<p>first works!</p>
+<!-- <p>first works!</p>
 
 
 <p>{{componentName}}</p>
@@ -14,13 +14,17 @@
 
 <div *ngIf="activeUsers >= 10">
   <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea atque repellendus perferendis debitis aperiam saepe. Sunt maiores fuga ipsa, eius minus corporis dolores eaque commodi veniam sequi quas libero? Et quo assumenda, eaque nesciunt adipisci delectus sequi, fugit ipsa ipsum optio at commodi sint. Ex accusantium quos ipsa quibusdam fugit!</p>
-</div>
+</div> -->
 
 
-<div [ngClass]="activeUsers >=10 ? 'primary' : 'secondary' " *ngFor="let item of listOfUser">
+<!-- <div [ngClass]="activeUsers >=10 ? 'primary' : 'secondary' " *ngFor="let item of listOfUser">
  <p>{{item.name}}  {{item.isActive}}</p>
-</div>
-<h3>-----------------------------------------</h3>
+</div> -->
+
+
+
+
+<!-- <h3>-----------------------------------------</h3>
 <div [ngClass]="setClass()"*ngFor="let item of listOfUser">
   <p>{{item.name}}  {{item.isActive}}</p>
  </div>
@@ -28,4 +32,9 @@
  <h3>-----------------------------------------</h3>
 <div [ngClass]="cssClasses" *ngFor="let item of listOfUser">
   <p>{{item.name}}  {{item.isActive}}</p>
+ </div> -->
+
+
+ <div *ngFor="let item of listOfUser">
+  <p>{{item.name}}</p>
  </div>

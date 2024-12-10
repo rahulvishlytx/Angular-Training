@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DemoService } from '../services/demo.service';
 
 @Component({
   selector: 'app-first',
@@ -21,17 +22,26 @@ export class FirstComponent implements OnInit {
   cssClass: string = 'primary';
   cssClasses: string[] = ['primary', 'primaryextended'];
 
-  listOfUser = [
-    { name: 'John', isActive: true },
-    { name: 'Joe', isActive: true },
-    { name: 'Mike', isActive: false },
-    { name: 'Essan', isActive: true },
-  ];
+  listOfUser : any
 
-  constructor() {}
+  
+  
+  constructor(private demoService: DemoService) {
+
+  }
+
+
+
+
 
   ngOnInit(): void {
-    console.log('FirstComponent initialized');
+    // this.demoService.getValues().subscribe(data => {
+    //   this.listOfUser = data;
+    // })
+
+    this.demoService.getValuesFromApi().subscribe(data => {
+      this.listOfUser = data;
+    })
   }
 
   onClick() {
