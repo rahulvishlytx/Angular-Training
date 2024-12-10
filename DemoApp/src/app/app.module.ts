@@ -6,13 +6,12 @@ import { AppComponent } from './app.component';
 import { FirstComponent } from './first/first.component';
 import { FormsModule } from '@angular/forms';
 import { DemoService } from './services/demo.service';
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { FormComponent } from './form/form.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [AppComponent, FirstComponent, FormComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule ],
-  providers: [DemoService, provideHttpClient(withInterceptorsFromDi())],
+  declarations: [AppComponent, FirstComponent],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
+  providers: [DemoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
