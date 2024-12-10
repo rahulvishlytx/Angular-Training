@@ -39,9 +39,9 @@ export class FirstComponent implements OnInit {
     //   this.listOfUser = data;
     // })
 
-    this.demoService.getValuesFromApi().subscribe(data => {
-      this.listOfUser = data;
-    })
+    // this.demoService.getValuesFromApi().subscribe(data => {
+    //   this.listOfUser = data;
+    // })
   }
 
   onClick() {
