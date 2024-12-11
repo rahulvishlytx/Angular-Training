@@ -1,0 +1,37 @@
+<div>
+     <button (click)="getAllUsers()">Get All Users</button>
+     <ul *ngFor="let user of users">
+        <li>{{user.id}} - {{user.name}} - {{user.email}}</li>
+    </ul>
+</div>
+<hr>
+<div>
+    <input type="text" placeholder="Enter User Id" [(ngModel)]="userid">
+    <button (click)="getUserById(userid)">Get User By Id</button>
+    <p *ngIf="user">{{user?.id}} - {{user?.name}} - {{user?.email}}</p>
+</div>
+<hr>
+<div>
+    <input type="text" placeholder="Enter User Id" [(ngModel)]="newUserId">
+    <input type="text" placeholder="Enter User Name" [(ngModel)]="newUserName">
+    <input type="text" placeholder="Enter User Email" [(ngModel)]="newUserEmail">
+    <button (click)="addUser(newUserId,newUserName,newUserEmail)">Add User</button>
+    <p *ngIf="isInserted">Inserted User Successfully</p>
+    <p *ngIf="isInserted">{{newUserId}} - {{newUserName}} - {{newUserEmail}} </p>
+</div>
+<hr>
+<div>
+    <input type="text" placeholder="Enter User Id which needs Update" [(ngModel)]="id">
+    <p></p>
+    <input type="text" placeholder="Enter User Name" [(ngModel)]="updateUserName">
+    <input type="text" placeholder="Enter User Email" [(ngModel)]="updateUserEmail">
+    <button (click)="updateUser(id, updateUserName,updateUserEmail)">Update User</button>
+    <p *ngIf="isUpdated">Updated User Successfully</p>
+    <p *ngIf="isUpdated">{{id}} - {{updateUserName}} - {{updateUserEmail}} </p>
+</div>
+<hr>
+<div>
+    <input type="text" placeholder="Enter User Id" [(ngModel)]="deleteUserId">
+    <button (click)="deleteUser(deleteUserId)">Delete User</button>
+    <p *ngIf="isDeleted">Deleted User Successfully</p>
+</div>
