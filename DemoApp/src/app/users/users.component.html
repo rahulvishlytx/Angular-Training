@@ -1,0 +1,15 @@
+<div>
+    <div *ngFor="let item of listOfUser">
+        <input type="text" [value]="item.name" #nameInput placeholder="Name">
+        <input type="email" [value]="item.email" #emailInput placeholder="Email">
+        <button (click)="updateUser(item.id, nameInput.value, emailInput.value)">Update</button>
+        <button (click)="deleteUser(item.id)">Delete</button>
+    </div> 
+    <div>
+        <h3>Add New User</h3>
+        <input type="text" [(ngModel)]="userName" placeholder="Enter name" required>
+        <input type="email" [(ngModel)]="emailId" placeholder="Enter email" required>
+        <input type="button" (click)="createUser()" value="click me">
+    </div>
+    </div>
+    
