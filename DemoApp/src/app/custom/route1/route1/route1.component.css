@@ -1,0 +1,23 @@
+.container {
+    width: 300px;
+    margin: 0 auto;
+    padding-top: 50px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  input.form-control {
+    width: 100%;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+  }
+  
