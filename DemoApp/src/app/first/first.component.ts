@@ -1,43 +1,84 @@
 import { Component, OnInit } from '@angular/core';
+import { DemoService } from '../services/demo.service';
 
 @Component({
   selector: 'app-first',
   standalone: false,
-
   templateUrl: './first.component.html',
-  styleUrl: './first.component.css',
+  styleUrls: ['./first.component.css'],
 })
 export class FirstComponent implements OnInit {
-  componentName: string = 'FirstComponent';
+  apiUsers: any[] = []; 
+  apiUser: any = {};   
+  userId: number = 1;   
+  newUser: any = { name: '', email: '' }; 
+  updateUserData: any = { id: 0, name: '', email: '' }; 
 
-  twoBinding: string = 'Enter the name';
-
-  srcUrl: string = 'https://angular.io/assets/images/logos/angular/angular.svg';
-
-  isActive: boolean = false;
-
-  activeUsers: number = 1;
-
-  cssClass: string = 'primary';
-  cssClasses: string[] = ['primary', 'primaryextended'];
-
-  listOfUser = [
-    { name: 'John', isActive: true },
-    { name: 'Joe', isActive: true },
-    { name: 'Mike', isActive: false },
-    { name: 'Essan', isActive: true },
-  ];
-
-  constructor() {}
+  constructor(private demoservice: DemoService) {}
 
   ngOnInit(): void {
-    console.log('FirstComponent initialized');
+    this.fetchAllUsers();
   }
 
-  onClick() {
-    console.log('Button clicked');
+  fetchAllUsers() {
+    this.demoservice.getUsers().subscribe(
+      (data) => {
+        this.apiUsers = data;
+      }
+    );
   }
-  setClass() {
-    return this.activeUsers >= 10 ? 'primary' : 'secondary';
+
+  fetchUserById() {
+    if (this.userId) {
+      this.demoservice.getUsersById(this.userId).subscribe(
+        (data) => {
+          this.apiUser = data; 
+        }
+      );
+    }
+  }
+
+  createUser() {
+    if (this.newUser.name && this.newUser.email) {
+      this.demoservice.createUser(this.newUser).subscribe(
+        (data) => {
+          console.log('User created:', data);
+          this.apiUsers.push(data); 
+          this.newUser = { id: 0, name: '', email: '' };
+        },
+        (error) => {
+          console.error('Error creating user:', error);
+        }
+      );
+    } else {
+      alert('Please fill in both name and email.');
+    }
+  }
+
+  updateUser() {
+    if (this.updateUserData.id && this.updateUserData.name && this.updateUserData.email) {
+      this.demoservice.updateUser(this.updateUserData.id, this.updateUserData).subscribe(
+        (data) => {
+          console.log('User updated:', data);
+          const index = this.apiUsers.findIndex(user => user.id === this.updateUserData.id);
+          if (index !== -1) {
+            this.apiUsers[index] = data;  
+          }
+          this.updateUserData = { id: 0, name: '', email: '' };  
+        }
+      );
+    } 
+  }
+
+  deleteUser() {
+    if (this.userId) {
+      this.demoservice.deleteUser(this.userId).subscribe(
+        (data) => {
+          console.log('User deleted:', data);
+          this.apiUsers = this.apiUsers.filter(user => user.id !== this.userId); 
+          this.userId = 0;  
+        }
+      );
+    }
   }
 }

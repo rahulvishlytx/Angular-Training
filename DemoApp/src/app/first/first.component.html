@@ -1,31 +1,40 @@
-<p>first works!</p>
-
-
-<p>{{componentName}}</p>
-
-<input type="text" [(ngModel)]="twoBinding">
-
-<p>This is the output value {{twoBinding}}</p>
-
-<img [src]="srcUrl" alt="">
-
-
-<input type="button" (click)="onClick()" value="click me">
-
-<div *ngIf="activeUsers >= 10">
-  <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea atque repellendus perferendis debitis aperiam saepe. Sunt maiores fuga ipsa, eius minus corporis dolores eaque commodi veniam sequi quas libero? Et quo assumenda, eaque nesciunt adipisci delectus sequi, fugit ipsa ipsum optio at commodi sint. Ex accusantium quos ipsa quibusdam fugit!</p>
+<div *ngIf="apiUsers && apiUsers.length > 0">
+  <h3>API Users:</h3>
+  <div *ngFor="let user of apiUsers">
+    <p>{{ user.name }} ({{ user.email }}) - {{ user.isActive ? 'Active' : 'Inactive' }}</p>
+  </div>
 </div>
 
-
-<div [ngClass]="activeUsers >=10 ? 'primary' : 'secondary' " *ngFor="let item of listOfUser">
- <p>{{item.name}}  {{item.isActive}}</p>
-</div>
 <h3>-----------------------------------------</h3>
-<div [ngClass]="setClass()"*ngFor="let item of listOfUser">
-  <p>{{item.name}}  {{item.isActive}}</p>
- </div>
 
- <h3>-----------------------------------------</h3>
-<div [ngClass]="cssClasses" *ngFor="let item of listOfUser">
-  <p>{{item.name}}  {{item.isActive}}</p>
- </div>
+<p>Enter User ID to fetch:</p>
+<input type="number" [(ngModel)]="userId" placeholder="Enter user ID" />
+<button (click)="fetchUserById()">Fetch User</button>
+
+<div *ngIf="apiUser && apiUser.name">
+  <h3>Fetched User Data:</h3>
+  <p>Name: {{ apiUser.name }}</p>
+  <p>Email: {{ apiUser.email }}</p>
+  <p>Status: {{ apiUser.isActive ? 'Active' : 'Inactive' }}</p>
+</div>
+
+<h3>-----------------------------------------</h3>
+
+<h3>Create New User:</h3>
+<input type="text" [(ngModel)]="newUser.name" placeholder="Enter name" />
+<input type="email" [(ngModel)]="newUser.email" placeholder="Enter email" />
+<button (click)="createUser()">Create User</button>
+
+<h3>-----------------------------------------</h3>
+
+<h3>Update User:</h3>
+<input type="number" [(ngModel)]="updateUserData.id" placeholder="Enter user ID" />
+<input type="text" [(ngModel)]="updateUserData.name" placeholder="Enter name" />
+<input type="email" [(ngModel)]="updateUserData.email" placeholder="Enter email" />
+<button (click)="updateUser()">Update User</button>
+
+<h3>-----------------------------------------</h3>
+
+<h3>Delete User:</h3>
+<input type="number" [(ngModel)]="userId" placeholder="Enter user ID to delete" />
+<button (click)="deleteUser()">Delete User</button>
