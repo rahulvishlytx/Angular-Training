@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { DemoService } from './services/demo.service';
 import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormComponent } from './form/form.component';
+import { CustomModule } from './custom/custom.module';
 
 @NgModule({
   declarations: [AppComponent, FirstComponent, FormComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, CustomModule ],
   providers: [DemoService, provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
 })

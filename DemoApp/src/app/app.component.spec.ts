@@ -13,11 +13,17 @@ describe('AppComponent', () => {
       ],
     }).compileComponents();
   });
+  afterAll(() => {
+
+  })
+  beforeAll(()=>{
+
+  })
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
+    const fixture = TestBed.createComponent(AppComponent); // arrange 
+    const app = fixture.componentInstance; // act
+    expect(app).toBeTruthy(); // assert
   });
 
   it(`should have as title 'DemoApp'`, () => {
@@ -32,4 +38,9 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Hello, DemoApp');
   });
+
+  it("should do something", ()=>{
+
+    
+  })
 });
