@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  nav ul li {
+    display: inline;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: rebeccapurple;
+
+  }
+  
+  nav ul li a.active {
+    text-decoration: underline;
+    color: rgb(148, 49, 49);
+
+  }
+  
+  hr {
+    margin: 20px 0;
+  }
+  
